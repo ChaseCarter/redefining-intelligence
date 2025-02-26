@@ -179,16 +179,29 @@ export default function FishJump() {
       }
     }
 
-    // Generate landmarks for starting puddle
+    // Generate random positions for landmarks within the central puddle
+    const getRandomPointInPuddle = () => {
+      const angle = Math.random() * Math.PI * 2;
+      const radius = Math.random() * (START_PUDDLE_RADIUS * 0.7); // 0.7 to keep landmarks away from edge
+      return {
+        x: centerPuddle.x + radius * Math.cos(angle),
+        y: centerPuddle.y + radius * Math.sin(angle)
+      };
+    };
+
+    const rockPos = getRandomPointInPuddle();
+    const plantPos = getRandomPointInPuddle();
+
+    // Generate landmarks for starting puddle with random positions
     const newLandmarks: Landmark[] = [
       {
-        x: centerPuddle.x - START_PUDDLE_RADIUS/2,
-        y: centerPuddle.y - START_PUDDLE_RADIUS/2,
+        x: rockPos.x,
+        y: rockPos.y,
         type: 'rock'
       },
       {
-        x: centerPuddle.x + START_PUDDLE_RADIUS/2,
-        y: centerPuddle.y + START_PUDDLE_RADIUS/2,
+        x: plantPos.x,
+        y: plantPos.y,
         type: 'plant'
       }
     ];
