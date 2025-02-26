@@ -66,7 +66,7 @@ export default function Home() {
               </details>
             </div>
           </details>
-          
+
           <details className="group border border-black/[.08] dark:border-white/[.145] rounded-lg">
             <summary className="cursor-pointer p-4 font-semibold flex items-center justify-between">
               Goby Fish Intelligence
@@ -79,11 +79,11 @@ export default function Home() {
                   <span className="transition-transform group-open/inner:rotate-180">▼</span>
                 </summary>
                 <div className="p-3 pt-0">
-                  <FishJump />
                   <div className="mt-4 p-4 bg-black/[.03] dark:bg-white/[.05] border border-black/[.08] dark:border-white/[.145] rounded-lg text-sm">
-                    <p className="mb-2">This experiment demonstrates the remarkable spatial memory capabilities of fish. In their natural environment, fish need to remember the locations of various features like hiding spots, feeding areas, and safe passages.</p>
-                    <p>Cleaner Wrasse, in particular, show exceptional ability to memorize and navigate complex reef environments, remembering the locations of cleaning stations and client fish territories. This spatial memory is crucial for their survival and successful operation as reef cleaners.</p>
+                    <p className="mb-2">In their natural environment, fish need to remember the locations of various features like hiding spots, feeding areas, and safe passages.</p>
+                    <p>Goby fish, in particular, show exceptional ability to memorize landmarks and the topography of their environment, so much so that they can make blind jumps to other nearby pools after the tide goes out.</p>
                   </div>
+                  <FishJump />
                 </div>
               </details>
             </div>
