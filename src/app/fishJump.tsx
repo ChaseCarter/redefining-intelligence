@@ -10,6 +10,7 @@ interface Puddle {
   y: number;
   radius: number;
   isStart?: boolean;
+  pondImage?: number; // Index of the pond SVG to use (1-6)
 }
 
 interface Fish {
@@ -36,12 +37,24 @@ const MEMORIZATION_TIME = 5000; // 5 seconds
 const CANVAS_WIDTH = 600;
 const CANVAS_HEIGHT = 400;
 const PUDDLE_COUNT = 5;
-const PUDDLE_RADIUS = 30;
-const START_PUDDLE_RADIUS = 45; // Larger starting puddle
+const PUDDLE_RADIUS = 40; // Increased to match SVG size better
+const START_PUDDLE_RADIUS = 55; // Larger starting puddle
 const FISH_SIZE = 15;
+
+// Add pond images array
+const pondImages = [
+  '/Pond1.svg',
+  '/Pond2.svg',
+  '/Pond3.svg',
+  '/Pond4.svg',
+  '/Pond5.svg',
+  '/Pond6.svg'
+];
 
 export default function FishJump() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const successSoundRef = useRef<HTMLAudioElement | null>(null);
+  const failureSoundRef = useRef<HTMLAudioElement | null>(null);
   const [gameState, setGameState] = useState<GameState>(GameState.READY);
   const [puddles, setPuddles] = useState<Puddle[]>([]);
   const [fish, setFish] = useState<Fish | null>(null);
@@ -50,6 +63,7 @@ export default function FishJump() {
   const [rotationAngle, setRotationAngle] = useState(0);
   const [startPuddlePos, setStartPuddlePos] = useState<{x: number, y: number} | null>(null);
   const [showAllPuddles, setShowAllPuddles] = useState(true);
+  const [loadedImages, setLoadedImages] = useState<HTMLImageElement[]>([]);
 
   // Initialize game
   useEffect(() => {
@@ -79,6 +93,30 @@ export default function FishJump() {
     return () => clearInterval(timer);
   }, [gameState]);
 
+  // Load pond images
+  useEffect(() => {
+    const images: HTMLImageElement[] = [];
+    let loadedCount = 0;
+
+    pondImages.forEach((src, index) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        images[index] = img;
+        loadedCount++;
+        if (loadedCount === pondImages.length) {
+          setLoadedImages(images);
+        }
+      };
+    });
+  }, []);
+
+  // Initialize audio elements
+  useEffect(() => {
+    successSoundRef.current = new Audio('/water-splash.wav');
+    failureSoundRef.current = new Audio('/plop.wav');
+  }, []);
+
   // Generate random puddles and place fish
   const generateGame = () => {
     const newPuddles: Puddle[] = [];
@@ -102,6 +140,7 @@ export default function FishJump() {
           x: Math.random() * (CANVAS_WIDTH - 2 * PUDDLE_RADIUS) + PUDDLE_RADIUS,
           y: Math.random() * (CANVAS_HEIGHT - 2 * PUDDLE_RADIUS) + PUDDLE_RADIUS,
           radius: PUDDLE_RADIUS,
+          pondImage: i % 6 // Assign a random pond image (0-5)
         };
         valid = !newPuddles.some(
           (p) =>
@@ -164,6 +203,9 @@ export default function FishJump() {
     setShowAllPuddles(true);
 
     if (clickedPuddle) {
+      // Play success sound
+      successSoundRef.current?.play().catch(console.error);
+      
       setFish({
         x: clickedPuddle.x,
         y: clickedPuddle.y,
@@ -171,6 +213,9 @@ export default function FishJump() {
       });
       setGameState(GameState.WON);
     } else {
+      // Play failure sound
+      failureSoundRef.current?.play().catch(console.error);
+      
       setGameState(GameState.LOST);
     }
   };
@@ -179,9 +224,11 @@ export default function FishJump() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
-    if (!canvas || !ctx || !fish || !startPuddlePos) return;
+    if (!canvas || !ctx || !fish || !startPuddlePos || loadedImages.length < 6) return;
 
-    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    // Fill background with tan color
+    ctx.fillStyle = '#ba975f';
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
     // Save the context state before any transformations
     ctx.save();
@@ -197,13 +244,14 @@ export default function FishJump() {
     puddles.forEach((puddle) => {
       // Only draw non-start puddles if showAllPuddles is true
       if (puddle.isStart || showAllPuddles) {
-        ctx.beginPath();
-        ctx.arc(puddle.x, puddle.y, puddle.radius, 0, Math.PI * 2);
-        ctx.fillStyle = '#4a90e2';
-        ctx.fill();
-
-        // Draw landmarks if this is the start puddle
         if (puddle.isStart) {
+          // Draw center puddle as a circle
+          ctx.beginPath();
+          ctx.arc(puddle.x, puddle.y, puddle.radius, 0, Math.PI * 2);
+          ctx.fillStyle = '#4a90e2';
+          ctx.fill();
+
+          // Draw landmarks
           landmarks.forEach(landmark => {
             ctx.beginPath();
             if (landmark.type === 'rock') {
@@ -215,6 +263,11 @@ export default function FishJump() {
             }
             ctx.fill();
           });
+        } else if (typeof puddle.pondImage === 'number' && loadedImages[puddle.pondImage]) {
+          // Draw SVG pond
+          const img = loadedImages[puddle.pondImage];
+          const size = puddle.radius * 2;
+          ctx.drawImage(img, puddle.x - size/2, puddle.y - size/2, size, size);
         }
       }
     });
@@ -235,7 +288,7 @@ export default function FishJump() {
     // Restore context to remove rotation
     ctx.restore();
 
-  }, [gameState, puddles, fish, landmarks, rotationAngle, startPuddlePos, showAllPuddles]);
+  }, [gameState, puddles, fish, landmarks, rotationAngle, startPuddlePos, showAllPuddles, loadedImages]);
 
   const startGame = () => {
     setGameState(GameState.MEMORIZE);
