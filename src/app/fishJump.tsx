@@ -180,8 +180,8 @@ export default function FishJump() {
     // Save the context state before any transformations
     ctx.save();
 
-    // If in playing state, rotate everything around the start puddle
-    if (gameState === GameState.PLAYING) {
+    // Always apply rotation if not in READY or MEMORIZE state
+    if (gameState !== GameState.READY && gameState !== GameState.MEMORIZE) {
       ctx.translate(startPuddlePos.x, startPuddlePos.y);
       ctx.rotate(rotationAngle);
       ctx.translate(-startPuddlePos.x, -startPuddlePos.y);
