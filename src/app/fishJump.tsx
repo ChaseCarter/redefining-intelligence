@@ -49,6 +49,7 @@ export default function FishJump() {
   const [landmarks, setLandmarks] = useState<Landmark[]>([]);
   const [rotationAngle, setRotationAngle] = useState(0);
   const [startPuddlePos, setStartPuddlePos] = useState<{x: number, y: number} | null>(null);
+  const [showAllPuddles, setShowAllPuddles] = useState(true);
 
   // Initialize game
   useEffect(() => {
@@ -64,9 +65,10 @@ export default function FishJump() {
       timer = setInterval(() => {
         setTimeLeft((prev) => {
           if (prev <= 1) {
-            // When transitioning to playing state, set random rotation
+            // When transitioning to playing state, set random rotation and hide puddles
             const randomRotation = Math.random() * Math.PI * 2;
             setRotationAngle(randomRotation);
+            setShowAllPuddles(false);
             setGameState(GameState.PLAYING);
             return MEMORIZATION_TIME / 1000;
           }
@@ -131,6 +133,7 @@ export default function FishJump() {
       y: centerPuddle.y,
       rotation: Math.random() * Math.PI * 2,
     });
+    setShowAllPuddles(true);
   };
 
   // Handle canvas click
@@ -156,6 +159,9 @@ export default function FishJump() {
         Math.hypot(p.x - rotatedX, p.y - rotatedY) < p.radius &&
         (p.x !== fish.x || p.y !== fish.y)
     );
+
+    // Show all puddles after click
+    setShowAllPuddles(true);
 
     if (clickedPuddle) {
       setFish({
@@ -189,24 +195,27 @@ export default function FishJump() {
 
     // Draw puddles
     puddles.forEach((puddle) => {
-      ctx.beginPath();
-      ctx.arc(puddle.x, puddle.y, puddle.radius, 0, Math.PI * 2);
-      ctx.fillStyle = '#4a90e2';
-      ctx.fill();
+      // Only draw non-start puddles if showAllPuddles is true
+      if (puddle.isStart || showAllPuddles) {
+        ctx.beginPath();
+        ctx.arc(puddle.x, puddle.y, puddle.radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#4a90e2';
+        ctx.fill();
 
-      // Draw landmarks if this is the start puddle
-      if (puddle.isStart) {
-        landmarks.forEach(landmark => {
-          ctx.beginPath();
-          if (landmark.type === 'rock') {
-            ctx.fillStyle = '#808080';
-            ctx.arc(landmark.x, landmark.y, 8, 0, Math.PI * 2);
-          } else {
-            ctx.fillStyle = '#2ecc71';
-            ctx.fillRect(landmark.x - 4, landmark.y - 8, 8, 16);
-          }
-          ctx.fill();
-        });
+        // Draw landmarks if this is the start puddle
+        if (puddle.isStart) {
+          landmarks.forEach(landmark => {
+            ctx.beginPath();
+            if (landmark.type === 'rock') {
+              ctx.fillStyle = '#808080';
+              ctx.arc(landmark.x, landmark.y, 8, 0, Math.PI * 2);
+            } else {
+              ctx.fillStyle = '#2ecc71';
+              ctx.fillRect(landmark.x - 4, landmark.y - 8, 8, 16);
+            }
+            ctx.fill();
+          });
+        }
       }
     });
 
@@ -226,17 +235,19 @@ export default function FishJump() {
     // Restore context to remove rotation
     ctx.restore();
 
-  }, [gameState, puddles, fish, landmarks, rotationAngle, startPuddlePos]);
+  }, [gameState, puddles, fish, landmarks, rotationAngle, startPuddlePos, showAllPuddles]);
 
   const startGame = () => {
     setGameState(GameState.MEMORIZE);
     setTimeLeft(MEMORIZATION_TIME / 1000);
     setRotationAngle(0);
+    setShowAllPuddles(true);
   };
 
   const resetGame = () => {
     setGameState(GameState.READY);
     setRotationAngle(0);
+    setShowAllPuddles(true);
     generateGame();
   };
 
