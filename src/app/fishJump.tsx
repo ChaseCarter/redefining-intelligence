@@ -39,7 +39,7 @@ const CANVAS_HEIGHT = 400;
 const PUDDLE_COUNT = 5;
 const PUDDLE_RADIUS = 40; // Increased to match SVG size better
 const START_PUDDLE_RADIUS = 55; // Larger starting puddle
-const FISH_SIZE = 15;
+const FISH_SIZE = 20; // Adjusted for sprite size
 
 // Add pond images array
 const pondImages = [
@@ -65,6 +65,7 @@ export default function FishJump() {
   const [showAllPuddles, setShowAllPuddles] = useState(true);
   const [loadedImages, setLoadedImages] = useState<HTMLImageElement[]>([]);
   const [centralPool, setCentralPool] = useState<HTMLImageElement | null>(null);
+  const [fishSprite, setFishSprite] = useState<HTMLImageElement | null>(null);
 
   // Initialize game
   useEffect(() => {
@@ -115,6 +116,12 @@ export default function FishJump() {
     centralPoolImg.src = '/CentralPool.png';
     centralPoolImg.onload = () => {
       setCentralPool(centralPoolImg);
+    };
+
+    const fishImg = new Image();
+    fishImg.src = '/FishSprite.svg';
+    fishImg.onload = () => {
+      setFishSprite(fishImg);
     };
   }, []);
 
@@ -231,7 +238,7 @@ export default function FishJump() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
-    if (!canvas || !ctx || !fish || !startPuddlePos || loadedImages.length < 6 || !centralPool) return;
+    if (!canvas || !ctx || !fish || !startPuddlePos || loadedImages.length < 6 || !centralPool || !fishSprite) return;
 
     // Fill background with tan color
     ctx.fillStyle = '#ba975f';
@@ -281,19 +288,13 @@ export default function FishJump() {
     ctx.save();
     ctx.translate(fish.x, fish.y);
     ctx.rotate(fish.rotation);
-    ctx.beginPath();
-    ctx.moveTo(FISH_SIZE, 0);
-    ctx.lineTo(-FISH_SIZE, FISH_SIZE / 2);
-    ctx.lineTo(-FISH_SIZE, -FISH_SIZE / 2);
-    ctx.closePath();
-    ctx.fillStyle = '#f39c12';
-    ctx.fill();
+    ctx.drawImage(fishSprite, -FISH_SIZE, -FISH_SIZE, FISH_SIZE * 2, FISH_SIZE * 2);
     ctx.restore();
 
     // Restore context to remove rotation
     ctx.restore();
 
-  }, [gameState, puddles, fish, landmarks, rotationAngle, startPuddlePos, showAllPuddles, loadedImages, centralPool]);
+  }, [gameState, puddles, fish, landmarks, rotationAngle, startPuddlePos, showAllPuddles, loadedImages, centralPool, fishSprite]);
 
   const startGame = () => {
     setGameState(GameState.MEMORIZE);
