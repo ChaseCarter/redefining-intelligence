@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import Quiz from "./quiz";
-import Roleplay from "./roleplay";
+import FishRoleplay from "./fishRoleplay";
 import PlateGame from "./plateGame";
 import FishJump from "./fishJump";
+import MonkeyRoleplay from "./monkeyRoleplay";
 
 export default function Home() {
   return (
@@ -55,7 +56,7 @@ export default function Home() {
                   <span className="transition-transform group-open/inner:rotate-180">▼</span>
                 </summary>
                 <div className="p-3 pt-0">
-                  <Roleplay />
+                  <FishRoleplay />
                 </div>
               </details>
               <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
@@ -213,6 +214,46 @@ export default function Home() {
                 </summary>
                 <div className="p-3 pt-0">
                   Elephants can recognize themselves in mirrors, understand their body as their own, and show awareness of their physical presence.
+                </div>
+              </details>
+            </div>
+          </details>
+
+          <details className="group border border-black/[.08] dark:border-white/[.145] rounded-lg">
+            <summary className="cursor-pointer p-4 font-semibold flex items-center justify-between">
+              Campbell's Monkey Intelligence
+              <span className="transition-transform group-open:rotate-180">▼</span>
+            </summary>
+            <div className="p-4 pt-0 flex flex-col gap-3">
+              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
+                <summary className="cursor-pointer p-3 flex items-center justify-between">
+                  Complex Communication
+                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
+                </summary>
+                <div className="p-3 pt-0">
+                  <MonkeyRoleplay />
+                  <div className="mt-4 p-4 bg-black/[.03] dark:bg-white/[.05] border border-black/[.08] dark:border-white/[.145] rounded-lg text-sm">
+                    <p className="mb-2">Campbell's monkeys demonstrate remarkable linguistic abilities through their sophisticated alarm call system. They use a combination of basic calls and modifiers to create different meanings, showing evidence of primitive syntax in non-human communication.</p>
+                    <p>Their calls exhibit properties similar to human language, including compositionality (combining elements to create new meanings) and reference (specific calls for specific threats). This suggests a level of cognitive sophistication previously underappreciated in non-human primates.</p>
+                  </div>
+                </div>
+              </details>
+              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
+                <summary className="cursor-pointer p-3 flex items-center justify-between">
+                  Social Learning
+                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
+                </summary>
+                <div className="p-3 pt-0">
+                  Young Campbell's monkeys learn their complex call system through social observation and practice, demonstrating sophisticated learning abilities and cultural transmission of knowledge.
+                </div>
+              </details>
+              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
+                <summary className="cursor-pointer p-3 flex items-center justify-between">
+                  Threat Assessment
+                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
+                </summary>
+                <div className="p-3 pt-0">
+                  These monkeys show remarkable ability to assess different types of threats and communicate them specifically to their group, displaying advanced cognitive abilities in threat discrimination and social coordination.
                 </div>
               </details>
             </div>

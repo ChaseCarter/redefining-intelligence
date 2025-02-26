@@ -33,7 +33,7 @@ Key facts about cleaner wrasse intelligence to incorporate:
 
 The tone should be educational but fun, highlighting the fascinating cognitive abilities of these small fish.`;
 
-export default function Roleplay({ 
+export default function FishRoleplay({ 
   title = "Cleaner Wrasse Roleplay", 
   description = "Experience life as a cleaner wrasse fish at a cleaning station. Interact with various client fish species and navigate the complex social dynamics of the reef.",
 }: RoleplayProps) {
