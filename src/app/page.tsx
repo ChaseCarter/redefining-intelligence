@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Quiz from "./quiz";
+import Roleplay from "./roleplay";
 
 export default function Home() {
   return (
@@ -148,6 +149,42 @@ export default function Home() {
                 </summary>
                 <div className="p-3 pt-0">
                   Elephants can recognize themselves in mirrors, understand their body as their own, and show awareness of their physical presence.
+                </div>
+              </details>
+            </div>
+          </details>
+
+          <details className="group border border-black/[.08] dark:border-white/[.145] rounded-lg">
+            <summary className="cursor-pointer p-4 font-semibold flex items-center justify-between">
+              Cleaner Wrasse Intelligence
+              <span className="transition-transform group-open:rotate-180">▼</span>
+            </summary>
+            <div className="p-4 pt-0 flex flex-col gap-3">
+              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
+                <summary className="cursor-pointer p-3 flex items-center justify-between">
+                  Social Cognition
+                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
+                </summary>
+                <div className="p-3 pt-0">
+                  Cleaner wrasse fish can recognize individual client fish, remember their interactions with them, and adjust their behavior based on the client's species and status.
+                </div>
+              </details>
+              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
+                <summary className="cursor-pointer p-3 flex items-center justify-between">
+                  Strategic Decision Making
+                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
+                </summary>
+                <div className="p-3 pt-0">
+                  They make complex decisions about which clients to prioritize, when to cheat (by taking a bite of healthy tissue), and how to manage their reputation in the reef community.
+                </div>
+              </details>
+              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
+                <summary className="cursor-pointer p-3 flex items-center justify-between">
+                  Interactive Roleplay
+                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
+                </summary>
+                <div className="p-3 pt-0">
+                  <Roleplay />
                 </div>
               </details>
             </div>
