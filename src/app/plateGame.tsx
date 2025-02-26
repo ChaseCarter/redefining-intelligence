@@ -7,23 +7,57 @@ interface Plate {
   color: 'red' | 'blue';
   hasCookie: boolean;
   showCrumbs: boolean;
+  isVisible: boolean;
+  position: {
+    top: string;
+    left: string;
+  };
+  isTransitioning: boolean;
 }
 
 export default function PlateGame() {
   const [round, setRound] = useState(1);
   const [score, setScore] = useState(0);
   const [plates, setPlates] = useState<Plate[]>([
-    { color: 'red', hasCookie: true, showCrumbs: false },
-    { color: 'blue', hasCookie: true, showCrumbs: false }
+    { color: 'red', hasCookie: true, showCrumbs: false, isVisible: true, position: { top: '0', left: '0' }, isTransitioning: false },
+    { color: 'blue', hasCookie: true, showCrumbs: false, isVisible: true, position: { top: '0', left: '0' }, isTransitioning: false }
   ]);
   const [disappearingPlate, setDisappearingPlate] = useState<'red' | 'blue'>();
   const [gameOver, setGameOver] = useState(false);
 
+  const getRandomQuadrants = () => {
+    // Define quadrants: [top%, left%]
+    const quadrants = [
+      ['10%', '10%'],   // Top left
+      ['10%', '60%'],   // Top right
+      ['60%', '10%'],   // Bottom left
+      ['60%', '60%']    // Bottom right
+    ];
+    
+    // Shuffle and take first two
+    const shuffled = [...quadrants].sort(() => Math.random() - 0.5);
+    return [
+      { top: shuffled[0][0], left: shuffled[0][1] },
+      { top: shuffled[1][0], left: shuffled[1][1] }
+    ];
+  };
+
   const startNewRound = () => {
-    setPlates([
-      { color: 'red', hasCookie: true, showCrumbs: false },
-      { color: 'blue', hasCookie: true, showCrumbs: false }
-    ]);
+    const positions = getRandomQuadrants();
+    
+    // First fade out plates
+    setPlates(prev => prev.map(plate => ({
+      ...plate,
+      isTransitioning: true
+    })));
+
+    // After fade out, update positions and fade back in
+    setTimeout(() => {
+      setPlates([
+        { color: 'red', hasCookie: true, showCrumbs: false, isVisible: true, position: positions[0], isTransitioning: false },
+        { color: 'blue', hasCookie: true, showCrumbs: false, isVisible: true, position: positions[1], isTransitioning: false }
+      ]);
+    }, 500); // Match the CSS transition duration
   };
 
   const handleCookieClick = (clickedColor: 'red' | 'blue') => {
@@ -42,13 +76,11 @@ export default function PlateGame() {
       clickedPlate.showCrumbs = true;
       setScore(prev => prev + 1);
 
-      // If they clicked the non-disappearing plate first, remove the other plate's cookie
-      if (clickedColor !== disappearingPlate) {
-        const otherPlate = newPlates.find(p => p.color !== clickedColor);
-        if (otherPlate) {
-          otherPlate.hasCookie = false;
-          otherPlate.showCrumbs = true;
-        }
+      // Only make the other plate disappear if it still has a cookie
+      const otherPlate = newPlates.find(p => p.color !== clickedColor);
+      if (otherPlate && otherPlate.hasCookie && clickedColor !== disappearingPlate) {
+        otherPlate.isVisible = false;
+        otherPlate.hasCookie = false;
       }
 
       setPlates(newPlates);
@@ -85,11 +117,18 @@ export default function PlateGame() {
         Round: {round}/10 | Score: {score}
       </div>
       
-      <div className="flex gap-8">
+      <div className="relative w-[400px] h-[400px]">
         {plates.map((plate, index) => (
           <div 
             key={plate.color}
-            className="relative w-32 h-32 cursor-pointer"
+            style={{
+              position: 'absolute',
+              top: plate.position.top,
+              left: plate.position.left
+            }}
+            className={`relative w-32 h-32 cursor-pointer transition-opacity duration-500 ${
+              plate.isVisible ? 'opacity-100' : 'opacity-0'
+            } ${plate.isTransitioning ? 'opacity-0' : 'opacity-100'}`}
             onClick={() => handleCookieClick(plate.color)}
           >
             <Image
@@ -110,7 +149,7 @@ export default function PlateGame() {
                 />
               </div>
             )}
-            {plate.showCrumbs && !plate.hasCookie && (
+            {plate.showCrumbs && !plate.hasCookie && plate.isVisible && (
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 <Image
                   src={`/Crumbs${index + 1}.png`}
