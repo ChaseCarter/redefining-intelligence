@@ -66,6 +66,8 @@ export default function FishJump() {
   const [loadedImages, setLoadedImages] = useState<HTMLImageElement[]>([]);
   const [centralPool, setCentralPool] = useState<HTMLImageElement | null>(null);
   const [fishSprite, setFishSprite] = useState<HTMLImageElement | null>(null);
+  const [rockSprite, setRockSprite] = useState<HTMLImageElement | null>(null);
+  const [seaweedSprite, setSeaweedSprite] = useState<HTMLImageElement | null>(null);
 
   // Initialize game
   useEffect(() => {
@@ -122,6 +124,18 @@ export default function FishJump() {
     fishImg.src = '/FishSprite.svg';
     fishImg.onload = () => {
       setFishSprite(fishImg);
+    };
+
+    const rockImg = new Image();
+    rockImg.src = '/Rocks.svg';
+    rockImg.onload = () => {
+      setRockSprite(rockImg);
+    };
+
+    const seaweedImg = new Image();
+    seaweedImg.src = '/Seaweed.svg';
+    seaweedImg.onload = () => {
+      setSeaweedSprite(seaweedImg);
     };
   }, []);
 
@@ -245,7 +259,7 @@ export default function FishJump() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
-    if (!canvas || !ctx || !fish || !startPuddlePos || loadedImages.length < 6 || !centralPool || !fishSprite) return;
+    if (!canvas || !ctx || !fish || !startPuddlePos || loadedImages.length < 6 || !centralPool || !fishSprite || !rockSprite || !seaweedSprite) return;
 
     // Fill background with tan color
     ctx.fillStyle = '#ba975f';
@@ -272,15 +286,12 @@ export default function FishJump() {
 
           // Draw landmarks
           landmarks.forEach(landmark => {
-            ctx.beginPath();
+            const landmarkSize = 16;
             if (landmark.type === 'rock') {
-              ctx.fillStyle = '#808080';
-              ctx.arc(landmark.x, landmark.y, 8, 0, Math.PI * 2);
+              ctx.drawImage(rockSprite, landmark.x - landmarkSize/2, landmark.y - landmarkSize/2, landmarkSize, landmarkSize);
             } else {
-              ctx.fillStyle = '#2ecc71';
-              ctx.fillRect(landmark.x - 4, landmark.y - 8, 8, 16);
+              ctx.drawImage(seaweedSprite, landmark.x - landmarkSize/2, landmark.y - landmarkSize/2, landmarkSize, landmarkSize * 2);
             }
-            ctx.fill();
           });
         } else if (typeof puddle.pondImage === 'number' && loadedImages[puddle.pondImage]) {
           // Draw SVG pond
@@ -301,7 +312,7 @@ export default function FishJump() {
     // Restore context to remove rotation
     ctx.restore();
 
-  }, [gameState, puddles, fish, landmarks, rotationAngle, startPuddlePos, showAllPuddles, loadedImages, centralPool, fishSprite]);
+  }, [gameState, puddles, fish, landmarks, rotationAngle, startPuddlePos, showAllPuddles, loadedImages, centralPool, fishSprite, rockSprite, seaweedSprite]);
 
   const startGame = () => {
     setGameState(GameState.MEMORIZE);

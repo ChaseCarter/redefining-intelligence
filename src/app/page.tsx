@@ -39,19 +39,6 @@ export default function Home() {
               </details>
               <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
                 <summary className="cursor-pointer p-3 flex items-center justify-between">
-                  Spatial Memory
-                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
-                </summary>
-                <div className="p-3 pt-0">
-                  <FishJump />
-                  <div className="mt-4 p-4 bg-black/[.03] dark:bg-white/[.05] border border-black/[.08] dark:border-white/[.145] rounded-lg text-sm">
-                    <p className="mb-2">This experiment demonstrates the remarkable spatial memory capabilities of fish. In their natural environment, fish need to remember the locations of various features like hiding spots, feeding areas, and safe passages.</p>
-                    <p>Cleaner Wrasse, in particular, show exceptional ability to memorize and navigate complex reef environments, remembering the locations of cleaning stations and client fish territories. This spatial memory is crucial for their survival and successful operation as reef cleaners.</p>
-                  </div>
-                </div>
-              </details>
-              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
-                <summary className="cursor-pointer p-3 flex items-center justify-between">
                   Interactive Roleplay
                   <span className="transition-transform group-open/inner:rotate-180">▼</span>
                 </summary>
@@ -75,6 +62,28 @@ export default function Home() {
                 </summary>
                 <div className="p-3 pt-0">
                   They make complex decisions about which clients to prioritize, when to cheat (by taking a bite of healthy tissue), and how to manage their reputation in the reef community.
+                </div>
+              </details>
+            </div>
+          </details>
+          
+          <details className="group border border-black/[.08] dark:border-white/[.145] rounded-lg">
+            <summary className="cursor-pointer p-4 font-semibold flex items-center justify-between">
+              Goby Fish Intelligence
+              <span className="transition-transform group-open:rotate-180">▼</span>
+            </summary>
+            <div className="p-4 pt-0 flex flex-col gap-3">
+              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
+                <summary className="cursor-pointer p-3 flex items-center justify-between">
+                  Spatial Memory
+                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
+                </summary>
+                <div className="p-3 pt-0">
+                  <FishJump />
+                  <div className="mt-4 p-4 bg-black/[.03] dark:bg-white/[.05] border border-black/[.08] dark:border-white/[.145] rounded-lg text-sm">
+                    <p className="mb-2">This experiment demonstrates the remarkable spatial memory capabilities of fish. In their natural environment, fish need to remember the locations of various features like hiding spots, feeding areas, and safe passages.</p>
+                    <p>Cleaner Wrasse, in particular, show exceptional ability to memorize and navigate complex reef environments, remembering the locations of cleaning stations and client fish territories. This spatial memory is crucial for their survival and successful operation as reef cleaners.</p>
+                  </div>
                 </div>
               </details>
             </div>
