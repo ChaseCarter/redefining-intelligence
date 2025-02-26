@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
 import GenerationClient from "./generationClient";
 
 interface Message {
