@@ -4,6 +4,7 @@ import Image from "next/image";
 import Quiz from "./quiz";
 import Roleplay from "./roleplay";
 import PlateGame from "./plateGame";
+import FishJump from "./fishJump";
 
 export default function Home() {
   return (
@@ -32,6 +33,19 @@ export default function Home() {
                   <div className="mt-4 p-4 bg-black/[.03] dark:bg-white/[.05] border border-black/[.08] dark:border-white/[.145] rounded-lg text-sm">
                     <p className="mb-2">This experiment tests pattern recognition and strategic decision-making. In each round, two plates appear with cookies, but choosing one plate causes the other to disappear - unless you pick the correct plate first. There is always one "safe" plate that allows you to get both cookies if selected first.</p>
                     <p>While humans often take several rounds to figure out the pattern, Cleaner Wrasse fish typically identify the correct strategy within just 3 rounds, demonstrating their remarkable cognitive abilities in sequential decision-making and memory tasks.</p>
+                  </div>
+                </div>
+              </details>
+              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
+                <summary className="cursor-pointer p-3 flex items-center justify-between">
+                  Spatial Memory
+                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
+                </summary>
+                <div className="p-3 pt-0">
+                  <FishJump />
+                  <div className="mt-4 p-4 bg-black/[.03] dark:bg-white/[.05] border border-black/[.08] dark:border-white/[.145] rounded-lg text-sm">
+                    <p className="mb-2">This experiment demonstrates the remarkable spatial memory capabilities of fish. In their natural environment, fish need to remember the locations of various features like hiding spots, feeding areas, and safe passages.</p>
+                    <p>Cleaner Wrasse, in particular, show exceptional ability to memorize and navigate complex reef environments, remembering the locations of cleaning stations and client fish territories. This spatial memory is crucial for their survival and successful operation as reef cleaners.</p>
                   </div>
                 </div>
               </details>
