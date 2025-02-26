@@ -26,12 +26,12 @@ export default function PlateGame() {
   const [gameOver, setGameOver] = useState(false);
 
   const getRandomQuadrants = () => {
-    // Define quadrants: [top%, left%]
+    // Define quadrants: [top%, left%] with closer spacing
     const quadrants = [
-      ['10%', '10%'],   // Top left
-      ['10%', '60%'],   // Top right
-      ['60%', '10%'],   // Bottom left
-      ['60%', '60%']    // Bottom right
+      ['13%', '13%'],   // Top left
+      ['13%', '53%'],   // Top right
+      ['53%', '13%'],   // Bottom left
+      ['53%', '53%']    // Bottom right
     ];
     
     // Shuffle and take first two
@@ -117,7 +117,7 @@ export default function PlateGame() {
         Round: {round}/10 | Score: {score}
       </div>
       
-      <div className="relative w-[400px] h-[400px]">
+      <div className="relative w-[300px] h-[300px]">
         {plates.map((plate, index) => (
           <div 
             key={plate.color}
