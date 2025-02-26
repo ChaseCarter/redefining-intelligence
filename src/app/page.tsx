@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Quiz from "./quiz";
 import Roleplay from "./roleplay";
+import PlateGame from "./plateGame";
 
 export default function Home() {
   return (
@@ -185,6 +186,15 @@ export default function Home() {
                 </summary>
                 <div className="p-3 pt-0">
                   <Roleplay />
+                </div>
+              </details>
+              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
+                <summary className="cursor-pointer p-3 flex items-center justify-between">
+                  Cookie Game
+                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
+                </summary>
+                <div className="p-3 pt-0">
+                  <PlateGame />
                 </div>
               </details>
             </div>
