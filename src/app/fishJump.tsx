@@ -64,6 +64,7 @@ export default function FishJump() {
   const [startPuddlePos, setStartPuddlePos] = useState<{x: number, y: number} | null>(null);
   const [showAllPuddles, setShowAllPuddles] = useState(true);
   const [loadedImages, setLoadedImages] = useState<HTMLImageElement[]>([]);
+  const [centralPool, setCentralPool] = useState<HTMLImageElement | null>(null);
 
   // Initialize game
   useEffect(() => {
@@ -93,7 +94,7 @@ export default function FishJump() {
     return () => clearInterval(timer);
   }, [gameState]);
 
-  // Load pond images
+  // Load pond images and central pool
   useEffect(() => {
     const images: HTMLImageElement[] = [];
     let loadedCount = 0;
@@ -109,6 +110,12 @@ export default function FishJump() {
         }
       };
     });
+
+    const centralPoolImg = new Image();
+    centralPoolImg.src = '/CentralPool.png';
+    centralPoolImg.onload = () => {
+      setCentralPool(centralPoolImg);
+    };
   }, []);
 
   // Initialize audio elements
@@ -224,7 +231,7 @@ export default function FishJump() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
-    if (!canvas || !ctx || !fish || !startPuddlePos || loadedImages.length < 6) return;
+    if (!canvas || !ctx || !fish || !startPuddlePos || loadedImages.length < 6 || !centralPool) return;
 
     // Fill background with tan color
     ctx.fillStyle = '#ba975f';
@@ -245,11 +252,9 @@ export default function FishJump() {
       // Only draw non-start puddles if showAllPuddles is true
       if (puddle.isStart || showAllPuddles) {
         if (puddle.isStart) {
-          // Draw center puddle as a circle
-          ctx.beginPath();
-          ctx.arc(puddle.x, puddle.y, puddle.radius, 0, Math.PI * 2);
-          ctx.fillStyle = '#4a90e2';
-          ctx.fill();
+          // Draw central pool using SVG
+          const size = puddle.radius * 2;
+          ctx.drawImage(centralPool, puddle.x - size/2, puddle.y - size/2, size, size);
 
           // Draw landmarks
           landmarks.forEach(landmark => {
@@ -288,7 +293,7 @@ export default function FishJump() {
     // Restore context to remove rotation
     ctx.restore();
 
-  }, [gameState, puddles, fish, landmarks, rotationAngle, startPuddlePos, showAllPuddles, loadedImages]);
+  }, [gameState, puddles, fish, landmarks, rotationAngle, startPuddlePos, showAllPuddles, loadedImages, centralPool]);
 
   const startGame = () => {
     setGameState(GameState.MEMORIZE);
