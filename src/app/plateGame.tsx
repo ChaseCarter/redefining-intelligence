@@ -89,7 +89,7 @@ export default function PlateGame() {
       if (!newPlates.some(p => p.hasCookie)) {
         if (round < 10) {
           setRound(prev => prev + 1);
-          setTimeout(startNewRound, 2000);
+          setTimeout(startNewRound, 1500);
         } else {
           setGameOver(true);
         }
@@ -131,35 +131,37 @@ export default function PlateGame() {
             } ${plate.isTransitioning ? 'opacity-0' : 'opacity-100'}`}
             onClick={() => handleCookieClick(plate.color)}
           >
-            <Image
-              src={`/Plate${index + 1}.png`}
-              alt={`${plate.color} plate`}
-              width={128}
-              height={128}
-              priority
-            />
-            {plate.hasCookie && (
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <Image
-                  src={`/Cookie${index + 1}.png`}
-                  alt="Cookie"
-                  width={64}
-                  height={64}
-                  priority
-                />
-              </div>
-            )}
-            {plate.showCrumbs && !plate.hasCookie && plate.isVisible && (
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <Image
-                  src={`/Crumbs${index + 1}.png`}
-                  alt="Crumbs"
-                  width={64}
-                  height={64}
-                  priority
-                />
-              </div>
-            )}
+            <div className={`transition-opacity duration-500 ${plate.isVisible ? 'opacity-100' : 'opacity-0'}`}>
+              <Image
+                src={`/Plate${index + 1}.png`}
+                alt={`${plate.color} plate`}
+                width={128}
+                height={128}
+                priority
+              />
+              {plate.hasCookie && (
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <Image
+                    src={`/Cookie${index + 1}.png`}
+                    alt="Cookie"
+                    width={64}
+                    height={64}
+                    priority
+                  />
+                </div>
+              )}
+              {plate.showCrumbs && !plate.hasCookie && plate.isVisible && (
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <Image
+                    src={`/Crumbs${index + 1}.png`}
+                    alt="Crumbs"
+                    width={64}
+                    height={64}
+                    priority
+                  />
+                </div>
+              )}
+            </div>
           </div>
         ))}
       </div>
