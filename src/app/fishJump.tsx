@@ -274,8 +274,8 @@ export default function FishJump() {
     const ctx = canvas?.getContext('2d');
     if (!canvas || !ctx || !fish || !startPuddlePos || loadedImages.length < 6 || !centralPool || !fishSprite || !rockSprite || !seaweedSprite) return;
 
-    // Fill background with tan color
-    ctx.fillStyle = '#ba975f';
+    // Fill background with light blue if not rotated, tan if rotated
+    ctx.fillStyle = (gameState === GameState.READY || gameState === GameState.MEMORIZE) ? '#5b97f0' : '#ba975f';
     ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
     // Save the context state before any transformations
