@@ -11,10 +11,55 @@ export default function Home() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <h1 className="text-3xl font-bold mb-6 text-center sm:text-left">Redefining Intelligence</h1>
         <p className="text-lg mb-8 max-w-2xl text-center sm:text-left">
-          Intelligence as typically defined is centered around human capabilities, making it a measure that is in some sense 'rigged' in our favor from the start. There are other kinds of intelligence exhibited by other species which we often overlook. 
+          Intelligence as typically defined is centered around human capabilities, making it a measure that is in some sense 'rigged' in our favor from the start. There are other kinds of intelligence exhibited by other species which we often overlook.
         </p>
 
         <div className="w-full max-w-2xl flex flex-col gap-4">
+
+          <details className="group border border-black/[.08] dark:border-white/[.145] rounded-lg">
+            <summary className="cursor-pointer p-4 font-semibold flex items-center justify-between">
+              Cleaner Wrasse Intelligence
+              <span className="transition-transform group-open:rotate-180">▼</span>
+            </summary>
+            <div className="p-4 pt-0 flex flex-col gap-3">
+              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
+                <summary className="cursor-pointer p-3 flex items-center justify-between">
+                  Cookie Game
+                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
+                </summary>
+                <div className="p-3 pt-0">
+                  <PlateGame />
+                </div>
+              </details>
+              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
+                <summary className="cursor-pointer p-3 flex items-center justify-between">
+                  Interactive Roleplay
+                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
+                </summary>
+                <div className="p-3 pt-0">
+                  <Roleplay />
+                </div>
+              </details>
+              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
+                <summary className="cursor-pointer p-3 flex items-center justify-between">
+                  Social Cognition
+                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
+                </summary>
+                <div className="p-3 pt-0">
+                  Cleaner wrasse fish can recognize individual client fish, remember their interactions with them, and adjust their behavior based on the client's species and status.
+                </div>
+              </details>
+              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
+                <summary className="cursor-pointer p-3 flex items-center justify-between">
+                  Strategic Decision Making
+                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
+                </summary>
+                <div className="p-3 pt-0">
+                  They make complex decisions about which clients to prioritize, when to cheat (by taking a bite of healthy tissue), and how to manage their reputation in the reef community.
+                </div>
+              </details>
+            </div>
+          </details>
           <details className="group border border-black/[.08] dark:border-white/[.145] rounded-lg">
             <summary className="cursor-pointer p-4 font-semibold flex items-center justify-between">
               Octopus Intelligence
@@ -26,7 +71,7 @@ export default function Home() {
                   Problem Solving
                   <span className="transition-transform group-open/inner:rotate-180">▼</span>
                 </summary>
-                <Quiz 
+                <Quiz
                   title="Quiz: Test your knowledge about octopus problem-solving abilities"
                   question="How long can octopi remember solutions to problems they've solved?"
                   options={[
@@ -57,7 +102,7 @@ export default function Home() {
                   ]}
                   additionalInfoId="octopus-info"
                 />
-                  
+
                 <div id="octopus-info" className="hidden mt-4 p-3">
                   Octopi can solve complex puzzles, open jars, and navigate mazes. They remember solutions to problems they encountered months ago and can learn from watching other octopi.
                 </div>
@@ -150,51 +195,6 @@ export default function Home() {
                 </summary>
                 <div className="p-3 pt-0">
                   Elephants can recognize themselves in mirrors, understand their body as their own, and show awareness of their physical presence.
-                </div>
-              </details>
-            </div>
-          </details>
-
-          <details className="group border border-black/[.08] dark:border-white/[.145] rounded-lg">
-            <summary className="cursor-pointer p-4 font-semibold flex items-center justify-between">
-              Cleaner Wrasse Intelligence
-              <span className="transition-transform group-open:rotate-180">▼</span>
-            </summary>
-            <div className="p-4 pt-0 flex flex-col gap-3">
-              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
-                <summary className="cursor-pointer p-3 flex items-center justify-between">
-                  Social Cognition
-                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
-                </summary>
-                <div className="p-3 pt-0">
-                  Cleaner wrasse fish can recognize individual client fish, remember their interactions with them, and adjust their behavior based on the client's species and status.
-                </div>
-              </details>
-              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
-                <summary className="cursor-pointer p-3 flex items-center justify-between">
-                  Strategic Decision Making
-                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
-                </summary>
-                <div className="p-3 pt-0">
-                  They make complex decisions about which clients to prioritize, when to cheat (by taking a bite of healthy tissue), and how to manage their reputation in the reef community.
-                </div>
-              </details>
-              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
-                <summary className="cursor-pointer p-3 flex items-center justify-between">
-                  Interactive Roleplay
-                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
-                </summary>
-                <div className="p-3 pt-0">
-                  <Roleplay />
-                </div>
-              </details>
-              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
-                <summary className="cursor-pointer p-3 flex items-center justify-between">
-                  Cookie Game
-                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
-                </summary>
-                <div className="p-3 pt-0">
-                  <PlateGame />
                 </div>
               </details>
             </div>
