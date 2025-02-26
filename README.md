@@ -26,8 +26,8 @@ The cleaner wrasse roleplay feature uses the OpenAI API to create an interactive
    npm install
    ```
 3. Set up your environment variables:
-   - Copy `.env.example` to `.env.local`
-   - Add your OpenAI API key to `.env.local`
+   - Copy `.env.example` to `.env`
+   - Add your OpenAI API key to `.env`
 4. Run the development server:
    ```
    npm run dev
