@@ -230,6 +230,13 @@ export default function FishJump() {
       // Play failure sound
       failureSoundRef.current?.play().catch(console.error);
       
+      // Move fish to clicked location
+      setFish({
+        x: rotatedX,
+        y: rotatedY,
+        rotation: Math.atan2(rotatedY - fish.y, rotatedX - fish.x),
+      });
+      
       setGameState(GameState.LOST);
     }
   };
