@@ -29,6 +29,10 @@ export default function Home() {
                 </summary>
                 <div className="p-3 pt-0">
                   <PlateGame />
+                  <div className="mt-4 p-4 bg-black/[.03] dark:bg-white/[.05] border border-black/[.08] dark:border-white/[.145] rounded-lg text-sm">
+                    <p className="mb-2">This experiment tests pattern recognition and strategic decision-making. In each round, two plates appear with cookies, but choosing one plate causes the other to disappear - unless you pick the correct plate first. There is always one "safe" plate that allows you to get both cookies if selected first.</p>
+                    <p>While humans often take several rounds to figure out the pattern, Cleaner Wrasse fish typically identify the correct strategy within just 3 rounds, demonstrating their remarkable cognitive abilities in sequential decision-making and memory tasks.</p>
+                  </div>
                 </div>
               </details>
               <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
