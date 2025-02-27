@@ -28,6 +28,7 @@ interface Landmark {
 enum GameState {
   READY = 'ready',
   MEMORIZE = 'memorize',
+  ROTATING = 'rotating',
   PLAYING = 'playing',
   WON = 'won',
   LOST = 'lost',
@@ -40,6 +41,7 @@ const PUDDLE_COUNT = 5;
 const PUDDLE_RADIUS = 40; // Increased to match SVG size better
 const START_PUDDLE_RADIUS = 55; // Larger starting puddle
 const FISH_SIZE = 20; // Adjusted for sprite size
+const FADE_DURATION = 500; // Duration of fade transition in ms
 
 // Add pond images array
 const pondImages = [
@@ -68,6 +70,7 @@ export default function FishJump() {
   const [fishSprite, setFishSprite] = useState<HTMLImageElement | null>(null);
   const [rockSprite, setRockSprite] = useState<HTMLImageElement | null>(null);
   const [seaweedSprite, setSeaweedSprite] = useState<HTMLImageElement | null>(null);
+  const [fadeOpacity, setFadeOpacity] = useState(0);
 
   // Initialize game
   useEffect(() => {
@@ -83,11 +86,23 @@ export default function FishJump() {
       timer = setInterval(() => {
         setTimeLeft((prev) => {
           if (prev <= 1) {
-            // When transitioning to playing state, set random rotation and hide puddles
-            const randomRotation = Math.random() * Math.PI * 2;
-            setRotationAngle(randomRotation);
-            setShowAllPuddles(false);
-            setGameState(GameState.PLAYING);
+            // Start rotation transition
+            setGameState(GameState.ROTATING);
+            setFadeOpacity(1);
+            
+            // After fade to black, set rotation and start fade out
+            setTimeout(() => {
+              const randomRotation = Math.random() * Math.PI * 2;
+              setRotationAngle(randomRotation);
+              setShowAllPuddles(false);
+              setFadeOpacity(0);
+              
+              // After fade out complete, start playing
+              setTimeout(() => {
+                setGameState(GameState.PLAYING);
+              }, FADE_DURATION);
+            }, FADE_DURATION);
+            
             return MEMORIZATION_TIME / 1000;
           }
           return prev - 1;
@@ -352,6 +367,10 @@ export default function FishJump() {
           onClick={handleClick}
           className="border-2 border-gray-300 rounded-lg"
         />
+        <div 
+          className="absolute inset-0 bg-black pointer-events-none transition-opacity duration-500"
+          style={{ opacity: fadeOpacity }}
+        />
         {gameState === GameState.MEMORIZE && (
           <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-black/75 text-white px-4 py-2 rounded">
             Memorize in: {timeLeft}s
@@ -381,7 +400,7 @@ export default function FishJump() {
           </button>
         )}
       </div>
-      <div className="text-gray-600 max-w-md text-center">
+      <div className="text-gray-200 max-w-md text-center">
         <p>
           {gameState === GameState.READY
             ? 'Press Start to begin! Memorize the puddle locations.'
