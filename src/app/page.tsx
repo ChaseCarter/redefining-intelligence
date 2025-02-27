@@ -9,7 +9,7 @@ import MonkeyRoleplay from "./monkeyRoleplay";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-8 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-8 sm:p-10 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <h1 className="text-3xl font-bold mb-6 text-center sm:text-left">Redefining Intelligence</h1>
         <p className="text-lg mb-8 max-w-2xl text-center sm:text-left">
@@ -17,10 +17,10 @@ export default function Home() {
         </p>
 
         <div className="w-full max-w-2xl flex flex-col gap-4">
-
+          {/* Cleaner Wrasse Fish */}
           <details className="group border border-black/[.08] dark:border-white/[.145] rounded-lg">
             <summary className="cursor-pointer p-4 font-semibold flex items-center justify-between">
-              Cleaner Wrasse Intelligence
+              Cleaner Wrasse Fish
               <span className="transition-transform group-open:rotate-180">▼</span>
             </summary>
             <div className="p-4 pt-0 flex flex-col gap-3">
@@ -35,15 +35,6 @@ export default function Home() {
                     <p className="mb-2">This experiment tests pattern recognition and strategic decision-making. In each round, two plates appear with cookies, but choosing one plate causes the other to disappear - unless you pick the correct plate first. There is always one "safe" plate that allows you to get both cookies if selected first.</p>
                     <p>While humans often take several rounds to figure out the pattern, Cleaner Wrasse fish typically identify the correct strategy within just 3 rounds, demonstrating their remarkable cognitive abilities in sequential decision-making and memory tasks.</p>
                   </div>
-                </div>
-              </details>
-              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
-                <summary className="cursor-pointer p-3 flex items-center justify-between">
-                  Interactive Roleplay
-                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
-                </summary>
-                <div className="p-3 pt-0">
-                  <FishRoleplay />
                 </div>
               </details>
               <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
@@ -64,12 +55,22 @@ export default function Home() {
                   They make complex decisions about which clients to prioritize, when to cheat (by taking a bite of healthy tissue), and how to manage their reputation in the reef community.
                 </div>
               </details>
+              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
+                <summary className="cursor-pointer p-3 flex items-center justify-between">
+                  Cleaning Station Roleplay
+                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
+                </summary>
+                <div className="p-3 pt-0">
+                  <FishRoleplay />
+                </div>
+              </details>
             </div>
           </details>
 
+          {/* Goby Fish */}
           <details className="group border border-black/[.08] dark:border-white/[.145] rounded-lg">
             <summary className="cursor-pointer p-4 font-semibold flex items-center justify-between">
-              Goby Fish Intelligence
+              Goby Fish
               <span className="transition-transform group-open:rotate-180">▼</span>
             </summary>
             <div className="p-4 pt-0 flex flex-col gap-3">
@@ -88,9 +89,52 @@ export default function Home() {
               </details>
             </div>
           </details>
+
+          {/* Monkey */}
           <details className="group border border-black/[.08] dark:border-white/[.145] rounded-lg">
             <summary className="cursor-pointer p-4 font-semibold flex items-center justify-between">
-              Octopus Intelligence
+              Campbell's Monkey
+              <span className="transition-transform group-open:rotate-180">▼</span>
+            </summary>
+            <div className="p-4 pt-0 flex flex-col gap-3">
+              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
+                <summary className="cursor-pointer p-3 flex items-center justify-between">
+                  Social Learning
+                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
+                </summary>
+                <div className="p-3 pt-0">
+                  Young Campbell's monkeys learn their complex call system through social observation and practice, demonstrating sophisticated learning abilities and cultural transmission of knowledge.
+                </div>
+              </details>
+              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
+                <summary className="cursor-pointer p-3 flex items-center justify-between">
+                  Threat Assessment
+                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
+                </summary>
+                <div className="p-3 pt-0">
+                  These monkeys show remarkable ability to assess different types of threats and communicate them specifically to their group, displaying advanced cognitive abilities in threat discrimination and social coordination.
+                </div>
+              </details>
+              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
+                <summary className="cursor-pointer p-3 flex items-center justify-between">
+                  Complex Communication
+                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
+                </summary>
+                <div className="p-3 pt-0">
+                  <MonkeyRoleplay />
+                  <div className="mt-4 p-4 bg-black/[.03] dark:bg-white/[.05] border border-black/[.08] dark:border-white/[.145] rounded-lg text-sm">
+                    <p className="mb-2">Campbell's monkeys demonstrate remarkable linguistic abilities through their sophisticated alarm call system. They use a combination of basic calls and modifiers to create different meanings, showing evidence of primitive syntax in non-human communication.</p>
+                    <p>Their calls exhibit properties similar to human language, including compositionality (combining elements to create new meanings) and reference (specific calls for specific threats). This suggests a level of cognitive sophistication previously underappreciated in non-human primates.</p>
+                  </div>
+                </div>
+              </details>
+            </div>
+          </details>
+
+          {/* Octopus */}
+          <details className="group border border-black/[.08] dark:border-white/[.145] rounded-lg">
+            <summary className="cursor-pointer p-4 font-semibold flex items-center justify-between">
+              Octopus
               <span className="transition-transform group-open:rotate-180">▼</span>
             </summary>
             <div className="p-4 pt-0 flex flex-col gap-3">
@@ -156,9 +200,10 @@ export default function Home() {
             </div>
           </details>
 
+          {/* Corvid */}    
           <details className="group border border-black/[.08] dark:border-white/[.145] rounded-lg">
             <summary className="cursor-pointer p-4 font-semibold flex items-center justify-between">
-              Corvid Intelligence
+              Corvid
               <span className="transition-transform group-open:rotate-180">▼</span>
             </summary>
             <div className="p-4 pt-0 flex flex-col gap-3">
@@ -192,9 +237,10 @@ export default function Home() {
             </div>
           </details>
 
+          {/* Elephant */}        
           <details className="group border border-black/[.08] dark:border-white/[.145] rounded-lg">
             <summary className="cursor-pointer p-4 font-semibold flex items-center justify-between">
-              Elephant Intelligence
+              Elephant
               <span className="transition-transform group-open:rotate-180">▼</span>
             </summary>
             <div className="p-4 pt-0 flex flex-col gap-3">
@@ -228,45 +274,6 @@ export default function Home() {
             </div>
           </details>
 
-          <details className="group border border-black/[.08] dark:border-white/[.145] rounded-lg">
-            <summary className="cursor-pointer p-4 font-semibold flex items-center justify-between">
-              Campbell's Monkey Intelligence
-              <span className="transition-transform group-open:rotate-180">▼</span>
-            </summary>
-            <div className="p-4 pt-0 flex flex-col gap-3">
-              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
-                <summary className="cursor-pointer p-3 flex items-center justify-between">
-                  Complex Communication
-                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
-                </summary>
-                <div className="p-3 pt-0">
-                  <MonkeyRoleplay />
-                  <div className="mt-4 p-4 bg-black/[.03] dark:bg-white/[.05] border border-black/[.08] dark:border-white/[.145] rounded-lg text-sm">
-                    <p className="mb-2">Campbell's monkeys demonstrate remarkable linguistic abilities through their sophisticated alarm call system. They use a combination of basic calls and modifiers to create different meanings, showing evidence of primitive syntax in non-human communication.</p>
-                    <p>Their calls exhibit properties similar to human language, including compositionality (combining elements to create new meanings) and reference (specific calls for specific threats). This suggests a level of cognitive sophistication previously underappreciated in non-human primates.</p>
-                  </div>
-                </div>
-              </details>
-              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
-                <summary className="cursor-pointer p-3 flex items-center justify-between">
-                  Social Learning
-                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
-                </summary>
-                <div className="p-3 pt-0">
-                  Young Campbell's monkeys learn their complex call system through social observation and practice, demonstrating sophisticated learning abilities and cultural transmission of knowledge.
-                </div>
-              </details>
-              <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
-                <summary className="cursor-pointer p-3 flex items-center justify-between">
-                  Threat Assessment
-                  <span className="transition-transform group-open/inner:rotate-180">▼</span>
-                </summary>
-                <div className="p-3 pt-0">
-                  These monkeys show remarkable ability to assess different types of threats and communicate them specifically to their group, displaying advanced cognitive abilities in threat discrimination and social coordination.
-                </div>
-              </details>
-            </div>
-          </details>
         </div>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">

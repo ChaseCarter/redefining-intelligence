@@ -28,10 +28,10 @@ export default function PlateGame() {
   const getRandomQuadrants = () => {
     // Define quadrants: [top%, left%] with closer spacing
     const quadrants = [
-      ['13%', '13%'],   // Top left
-      ['13%', '53%'],   // Top right
-      ['53%', '13%'],   // Bottom left
-      ['53%', '53%']    // Bottom right
+      ['12%', '10%'],   // Top left
+      ['12%', '55%'],   // Top right
+      ['55%', '10%'],   // Bottom left
+      ['55%', '55%']    // Bottom right
     ];
     
     // Shuffle and take first two
