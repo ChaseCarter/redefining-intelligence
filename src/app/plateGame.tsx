@@ -15,7 +15,11 @@ interface Plate {
   isTransitioning: boolean;
 }
 
-export default function PlateGame() {
+interface PlateGameProps {
+  onGameComplete: (completed: boolean) => void;
+}
+
+export default function PlateGame({ onGameComplete }: PlateGameProps) {
   const [round, setRound] = useState(1);
   const [score, setScore] = useState(0);
   const [plates, setPlates] = useState<Plate[]>([
@@ -92,6 +96,7 @@ export default function PlateGame() {
           setTimeout(startNewRound, 1500);
         } else {
           setGameOver(true);
+          onGameComplete(true);
         }
       }
     }
@@ -101,6 +106,7 @@ export default function PlateGame() {
     setRound(1);
     setScore(0);
     setGameOver(false);
+    onGameComplete(false);
     setDisappearingPlate(Math.random() < 0.5 ? 'red' : 'blue');
     startNewRound();
   };

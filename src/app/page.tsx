@@ -6,8 +6,11 @@ import FishRoleplay from "./fishRoleplay";
 import PlateGame from "./plateGame";
 import FishJump from "./fishJump";
 import MonkeyRoleplay from "./monkeyRoleplay";
+import { useState } from "react";
 
 export default function Home() {
+  const [showDescription, setShowDescription] = useState(false);
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-8 sm:p-10 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -16,7 +19,7 @@ export default function Home() {
           Intelligence as typically defined is centered around human capabilities, making it a measure that is in some sense 'rigged' in our favor from the start. There are other kinds of intelligence exhibited by other species which we often overlook.
         </p>
         <p className="text-lg mb-8 max-w-2xl text-center sm:text-left">
-        The anthropomorphism or “humanization” of other species and their intelligence is a major barrier to understanding non-human experiences. While it may be tempting to compare what we know about other animals to our lives and faculties as humans, it’s important to try decentering our perspective when understanding other species. Our purpose is to showcase other, nonhuman forms of intelligence. Below, you will find games, quizzes and interactive roleplay scenarios that illustrate the intelligence of different species. 
+        The anthropomorphism or "humanization" of other species and their intelligence is a major barrier to understanding non-human experiences. While it may be tempting to compare what we know about other animals to our lives and faculties as humans, it's important to try decentering our perspective when understanding other species. Our purpose is to showcase other, nonhuman forms of intelligence. Below, you will find games, quizzes and interactive roleplay scenarios that illustrate the intelligence of different species. 
         </p>
         <div className="w-full max-w-2xl flex flex-col gap-4">
           {/* Cleaner Wrasse Fish */}
@@ -32,12 +35,23 @@ export default function Home() {
                   <span className="transition-transform group-open/inner:rotate-180">▼</span>
                 </summary>
                 <div className="p-3 pt-0">
-                  <PlateGame />
-                  <div className="mt-4 p-4 bg-black/[.03] dark:bg-white/[.05] border border-black/[.08] dark:border-white/[.145] rounded-lg text-sm">
-                    <p className="mb-2">This experiment tests pattern recognition and strategic decision-making. In each round, two plates appear with cookies, but choosing one plate causes the other to disappear - unless you pick the correct plate first. There is always one "safe" plate that allows you to get both cookies if selected first.</p>
-                    <p>While humans often take several rounds to figure out the pattern, Cleaner Wrasse fish typically identify the correct strategy within just 3 rounds, demonstrating their remarkable cognitive abilities in sequential decision-making and memory tasks.</p>
-                    <p>A 2012 study showed that cleaner wrasses outperformed chimps and orangutans on this task. How did you do?</p>
+                  <p>Are you smarter than a cleaner wrasse?</p>
+                  <p>Try to eat as many cookies as you can in 10 rounds!</p>
+                </div>
+                <div className="p-3 pt-0">
+                  <PlateGame onGameComplete={(completed) => setShowDescription(completed)} />
+                  {showDescription && (
+                    <div className="mt-4 p-4 bg-black/[.03] dark:bg-white/[.05] border border-black/[.08] dark:border-white/[.145] rounded-lg text-sm">
+                      <p className="mb-2">This experiment tests pattern recognition and strategic decision-making. In each round, two plates appear with cookies, but choosing one plate causes the other to disappear - unless you pick the correct plate first. There is always one "safe" plate that allows you to get both cookies if selected first.</p>
+                      <p>While humans often take several rounds to figure out the pattern, Cleaner Wrasse fish typically identify the correct strategy within just 3 rounds, demonstrating their remarkable cognitive abilities in sequential decision-making and memory tasks.</p>
+                      <p>A 2012 study showed that cleaner wrasses outperformed chimps and orangutans (who often take up to 100 rounds to figure out the pattern) on this task. How did you do?</p>
+                    </div>
+                  )}
+                  {!showDescription && (
+                    <div className="mt-4 p-4 bg-black/[.03] dark:bg-white/[.05] border border-black/[.08] dark:border-white/[.145] rounded-lg text-sm">
+                    <p className="mb-2">Complete all 10 rounds to find out how this intelligence test works</p>
                   </div>
+                  )}
                 </div>
               </details>
               <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
@@ -46,7 +60,7 @@ export default function Home() {
                   <span className="transition-transform group-open/inner:rotate-180">▼</span>
                 </summary>
                 <div className="p-3 pt-0">
-                Cleaner wrasse fish can recognize individual client fish, remember their interactions with them, and adjust their behavior based on the client's species and status. Since scales, skin and other live fish tissue are more nutritious than the parasites they are “hired” to remove from their clients, cleaner wrasses will sometimes cheat by taking a small bite out of the fish they are cleaning. 
+                Cleaner wrasse fish can recognize individual client fish, remember their interactions with them, and adjust their behavior based on the client's species and status. Since scales, skin and other live fish tissue are more nutritious than the parasites they are "hired" to remove from their clients, cleaner wrasses will sometimes cheat by taking a small bite out of the fish they are cleaning. 
 In order to decide whether or not they can get away with this, cleaner wrasses can remember up to 100 individual clients, and whether or not their last experience at the cleaning station was positive or negative. 
                 </div>
               </details>
@@ -56,9 +70,9 @@ In order to decide whether or not they can get away with this, cleaner wrasses c
                   <span className="transition-transform group-open/inner:rotate-180">▼</span>
                 </summary>
                 <div className="p-3 pt-0">
-                The fish mentally group their clients into one of 3 categories: dangerous predators, transient “floater” fish that travel across the reef and have several cleaning stations to choose from, and small resident fish. Wrasses will almost never bite the predators (lest they get eaten!) or the visiting customers (so they come back for their next cleaning). In fact, if the wrasse gave the client bad service during their last cleaning, they will “apologize” by giving them a fin massage. 
+                The fish mentally group their clients into one of 3 categories: dangerous predators, transient "floater" fish that travel across the reef and have several cleaning stations to choose from, and small resident fish. Wrasses will almost never bite the predators (lest they get eaten!) or the visiting customers (so they come back for their next cleaning). In fact, if the wrasse gave the client bad service during their last cleaning, they will "apologize" by giving them a fin massage. 
 
-Small resident fish get the worst service by far. Since they live in the area, they’re guaranteed to keep coming back to the cleaning station, so the wrasse doesn’t have to give them special treatment to keep their business. As a result, cleaner wrasses are far more likely to bite the small residents and often keep them waiting while a higher-priority client gets their cleaning.
+Small resident fish get the worst service by far. Since they live in the area, they're guaranteed to keep coming back to the cleaning station, so the wrasse doesn't have to give them special treatment to keep their business. As a result, cleaner wrasses are far more likely to bite the small residents and often keep them waiting while a higher-priority client gets their cleaning.
 
                 </div>
               </details>
@@ -119,7 +133,7 @@ Small resident fish get the worst service by far. Since they live in the area, t
                   <span className="transition-transform group-open/inner:rotate-180">▼</span>
                 </summary>
                 <div className="p-3 pt-0">
-                Campbell’s monkeys react differently to different kinds of threats and use different calls to warn other members of their group. Campbell’s monkey calls are actually quite complex. They have a repertoire of at least six calls, and they can be combined into sequences to fit different contexts. Linguists have compared the vocal communication system of Campbell’s monkeys to a “grammar” of sorts. While it’s important to remember not to anthropomorphize, the complexity of the monkeys’ call system is impressive!
+                Campbell's monkeys react differently to different kinds of threats and use different calls to warn other members of their group. Campbell's monkey calls are actually quite complex. They have a repertoire of at least six calls, and they can be combined into sequences to fit different contexts. Linguists have compared the vocal communication system of Campbell's monkeys to a "grammar" of sorts. While it's important to remember not to anthropomorphize, the complexity of the monkeys' call system is impressive!
                 </div>
               </details>
               <details className="group/inner border border-black/[.08] dark:border-white/[.145] rounded-lg">
